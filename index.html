@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balraj Parsi | Backend Software Engineer</title>
+    <meta name="description" content="Backend Software Engineer with 6+ years at Amazon, Microsoft, and Capital One. Java, Kafka, DynamoDB, AWS.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0f19;
+            --bg2: #111827;
+            --bg3: #161d2f;
+            --card: #1a2332;
+            --card-hover: #1f2b3d;
+            --accent: #60a5fa;
+            --accent2: #a78bfa;
+            --accent3: #34d399;
+            --text: #e2e8f0;
+            --text2: #94a3b8;
+            --text3: #64748b;
+            --border: rgba(255,255,255,0.06);
+            --glow: rgba(96,165,250,0.15);
+            --font: 'Outfit', sans-serif;
+            --mono: 'Fira Code', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* FLOATING PARTICLES */
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--mono);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .logo span { color: var(--text3); font-weight: 400; }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.2rem;
+        }
+
+        .nav-links a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger span {
+            width: 26px;
+            height: 2px;
+            background: var(--text2);
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        section { padding: 7rem 0; }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: rgba(96,165,250,0.08);
+            border: 1px solid rgba(96,165,250,0.15);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text2);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .gradient { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient2 { background: linear-gradient(135deg, var(--accent3), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(52,211,153,0.08);
+            border: 1px solid rgba(52,211,153,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            color: var(--accent3);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero-badge .dot {
+            width: 8px; height: 8px;
+            background: var(--accent3);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-desc {
+            font-size: 1.12rem;
+            color: var(--text2);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 540px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.6rem;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #0b0f19;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(96,165,250,0.3);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text2);
+        }
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .hero-stat-num {
+            font-family: var(--mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .hero-stat-label {
+            font-size: 0.82rem;
+            color: var(--text3);
+            font-weight: 500;
+        }
+
+        /* HERO RIGHT - Terminal */
+        .terminal {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.9rem 1.2rem;
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #f87171; }
+        .dot-yellow { background: #fbbf24; }
+        .dot-green { background: #34d399; }
+
+        .terminal-title {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text3);
+            margin-left: 0.5rem;
+        }
+
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            line-height: 2;
+            color: var(--text2);
+        }
+
+        .terminal-body .key { color: var(--accent2); }
+        .terminal-body .val { color: var(--accent3); }
+        .terminal-body .str { color: #fbbf24; }
+        .terminal-body .comment { color: var(--text3); }
+
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .about-text {
+            color: var(--text2);
+            font-size: 1.02rem;
+            line-height: 1.9;
+        }
+
+        .about-text p { margin-bottom: 1.2rem; }
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .about-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .about-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .about-card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+        .about-card-num {
+            font-family: var(--mono);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .about-card-label {
+            font-size: 0.8rem;
+            color: var(--text3);
+            font-weight: 500;
+            margin-top: 0.2rem;
+        }
+
+        /* EXPERIENCE */
+        .exp-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .exp-tab {
+            padding: 0.6rem 1.4rem;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text2);
+            font-family: var(--font);
+            transition: all 0.3s;
+        }
+
+        .exp-tab:hover { border-color: var(--accent); color: var(--accent); }
+        .exp-tab.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: var(--bg);
+            border-color: transparent;
+        }
+
+        .exp-panel { display: none; }
+        .exp-panel.active { display: block; animation: fadeIn 0.4s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .exp-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .exp-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .exp-company { color: var(--accent); font-weight: 600; }
+
+        .exp-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text3);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        .exp-desc {
+            color: var(--text2);
+            font-size: 0.98rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        .exp-bullets {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .exp-bullet {
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .exp-bullet-icon {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border-radius: 6px;
+            background: var(--glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        .exp-bullet-text {
+            color: var(--text2);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .skill-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        }
+
+        .skill-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card-icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .skill-card-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+
+        .skill-tag {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 8px;
+            background: rgba(96,165,250,0.06);
+            border: 1px solid rgba(96,165,250,0.12);
+            color: var(--text2);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover { background: var(--glow); color: var(--accent); border-color: var(--accent); }
+
+        /* EDUCATION */
+        .edu-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .edu-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .edu-card:hover { border-color: var(--accent); transform: translateX(6px); }
+
+        .edu-degree { font-weight: 700; font-size: 1.02rem; margin-bottom: 0.2rem; }
+        .edu-school { color: var(--text3); font-size: 0.88rem; }
+        .edu-gpa { font-family: var(--mono); color: var(--accent); font-weight: 600; font-size: 0.88rem; }
+        .edu-dates { color: var(--text3); font-size: 0.82rem; }
+
+        /* CONTACT */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .contact-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .contact-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+        .contact-label { font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.4rem; }
+        .contact-value { font-size: 0.95rem; color: var(--text); font-weight: 600; }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text3);
+            font-size: 0.82rem;
+        }
+
+        /* SCROLL ANIMATION */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .terminal { display: none; }
+            .hero h1 { font-size: 2.6rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0; right: 0;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border);
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+            }
+            .hamburger { display: flex; }
+            .exp-meta { flex-direction: column; gap: 0.3rem; }
+            .edu-card { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PARTICLES -->
+<div class="particles" id="particles"></div>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="logo">balraj<span>.dev</span></a>
+        <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-grid">
+            <div>
+                <div class="hero-badge"><span class="dot"></span> Open to Full-Time Opportunities</div>
+                <h1>Hi, I'm <span class="gradient">Balraj</span><br>Parsi</h1>
+                <p class="hero-desc">Backend Software Engineer with 6+ years building Java microservices, Kafka data pipelines, and cloud-native services at Capital One, Microsoft, and Amazon Web Services.</p>
+                <div class="hero-btns">
+                    <a href="mailto:baluparsi@gmail.com" class="btn btn-primary">Get In Touch</a>
+                    <a href="https://linkedin.com/in/parsibalraj" target="_blank" class="btn btn-ghost">LinkedIn</a>
+                    <a href="https://github.com/balrajparsi" target="_blank" class="btn btn-ghost">GitHub</a>
+                </div>
+                <div class="hero-stats">
+                    <div>
+                        <div class="hero-stat-num">6+</div>
+                        <div class="hero-stat-label">Years Experience</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-num">4</div>
+                        <div class="hero-stat-label">Top Companies</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-num">100K+</div>
+                        <div class="hero-stat-label">Daily Records</div>
+                    </div>
+                </div>
+            </div>
+            <div class="terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot dot-red"></span>
+                    <span class="terminal-dot dot-yellow"></span>
+                    <span class="terminal-dot dot-green"></span>
+                    <span class="terminal-title">balraj_parsi.json</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment">// who am i</span><br>
+                    {<br>
+                    &nbsp;&nbsp;<span class="key">"name"</span>: <span class="str">"Balraj Parsi"</span>,<br>
+                    &nbsp;&nbsp;<span class="key">"role"</span>: <span class="str">"Backend Engineer"</span>,<br>
+                    &nbsp;&nbsp;<span class="key">"location"</span>: <span class="str">"Richmond, VA"</span>,<br>
+                    &nbsp;&nbsp;<span class="key">"stack"</span>: [<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Java"</span>, <span class="str">"Kafka"</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"DynamoDB"</span>, <span class="str">"AWS"</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Spring Boot"</span><br>
+                    &nbsp;&nbsp;],<br>
+                    &nbsp;&nbsp;<span class="key">"companies"</span>: [<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="val">"Capital One"</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="val">"Microsoft"</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="val">"Amazon"</span><br>
+                    &nbsp;&nbsp;],<br>
+                    &nbsp;&nbsp;<span class="key">"status"</span>: <span class="val">"Open to work"</span><br>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container reveal">
+        <div class="section-badge">About Me</div>
+        <h2 class="section-title">Building reliable systems <span class="gradient2">at scale</span></h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>I'm a backend engineer who owns services end-to-end. At Capital One, I work on the Small Business Bank modernization team, where three engineers manage 4 production Java microservices across 15 repositories with no dedicated QA. We build Kafka Streams data pipelines, migrate databases, and push 2-3 production deployments every week.</p>
+                <p>Before Capital One, I worked at Microsoft on Azure Resource Graph, owning backend services that handled data sync and query processing across 5+ global regions. Before that, I was at Amazon Web Services on Apollo, the deployment platform that ships software to S3, DynamoDB, and Amazon Retail across 6 million+ EC2 hosts.</p>
+                <p>Outside of work, I'm pursuing an Executive MS in AI at the University of the Cumberlands. I also enjoy learning Spanish, exploring new places on weekends, and finding good vegetarian food.</p>
+            </div>
+            <div class="about-cards">
+                <div class="about-card">
+                    <div class="about-card-icon">&#128187;</div>
+                    <div class="about-card-num">6+</div>
+                    <div class="about-card-label">Years Engineering</div>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-icon">&#127959;</div>
+                    <div class="about-card-num">4</div>
+                    <div class="about-card-label">Services Owned</div>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-icon">&#128640;</div>
+                    <div class="about-card-num">100K+</div>
+                    <div class="about-card-label">Daily Synced Records</div>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-icon">&#127757;</div>
+                    <div class="about-card-num">6M+</div>
+                    <div class="about-card-label">EC2 Hosts Supported</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+    <div class="container reveal">
+        <div class="section-badge">Career</div>
+        <h2 class="section-title">Professional <span class="gradient">Experience</span></h2>
+        <p class="section-subtitle">Building backend systems across finance, cloud infrastructure, and enterprise deployment platforms.</p>
+
+        <div class="exp-tabs">
+            <button class="exp-tab active" onclick="showExp(0)">Capital One</button>
+            <button class="exp-tab" onclick="showExp(1)">Microsoft</button>
+            <button class="exp-tab" onclick="showExp(2)">Amazon</button>
+            <button class="exp-tab" onclick="showExp(3)">HCL Technologies</button>
+        </div>
+
+        <!-- CAPITAL ONE -->
+        <div class="exp-panel active" id="exp-0">
+            <div class="exp-header">
+                <div class="exp-title">Backend Software Engineer <span class="exp-company">@ Capital One</span></div>
+                <div class="exp-meta"><span>Jun 2025 - Present</span><span>Richmond, VA</span></div>
+            </div>
+            <p class="exp-desc">Working on the Small Business Bank (SBB) modernization within Bank Tech. My 3-person team owns the full lifecycle of 4 Java microservices across 15 repositories, shipping 2-3 production deployments weekly with zero dedicated QA.</p>
+            <div class="exp-bullets">
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Built Kafka Streams data pipelines that synchronize customer PII between Systematics and RA banking systems through nightly batch jobs, processing 80K-100K record changes daily and eliminating data duplication at the enterprise level.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Designed a bidirectional data sync between Business Core and Systematics, reducing duplicate customer records and cutting API response times for downstream services that previously queried multiple sources.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Led the database migration from Aurora DB (PostgreSQL) to DynamoDB, restructuring partition key strategies and data access patterns to fit the key-value model while maintaining consistency across services.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Resolved multiple production defects, including a VP-escalation incident where address updates nullified customer name fields. Deployed a hotfix in 40 minutes, limiting blast radius to 9 of ~100K daily transactions.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Replaced .jks certificate authentication with Turing OAuth2 across all repos, eliminating manual 90-day certificate rotations and reducing outage risk from expired certs.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Implemented cyber audit logging on DynamoDB tables for security compliance, ensuring all customer data access is tracked and auditable.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Manage full CI/CD pipeline: Jenkins + One Pipeline, JFrog Artifactory, SonarQube, Mend for vulnerability scanning, and AWS CodeDeploy with PagerDuty for incident alerting.</div></div>
+            </div>
+        </div>
+
+        <!-- MICROSOFT -->
+        <div class="exp-panel" id="exp-1">
+            <div class="exp-header">
+                <div class="exp-title">Software Engineer <span class="exp-company">@ Microsoft</span></div>
+                <div class="exp-meta"><span>Jan 2024 - May 2025</span><span>Redmond, WA</span></div>
+            </div>
+            <p class="exp-desc">Worked on the Azure Resource Graph (ARG) team, a core Azure service enabling customers to query and explore cloud resources at global scale. Owned backend services for data synchronization and query routing across multiple regions.</p>
+            <div class="exp-bullets">
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Owned backend services (Notification Service, PartialSync, Multiplexer) handling real-time data sync and query processing across 5+ global regions for Azure Resource Graph.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Optimized data synchronization logic to fix recurring sync failures causing stale query results for enterprise Azure customers.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Tuned Global Traffic Manager routing across WEU and SEA regions, improving cross-region failover reliability and reducing outage frequency from uneven traffic loads.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Built PowerShell and C# validation scripts as pre-deployment gates to catch configuration drift and data inconsistencies, reducing deployment failures by ~20%.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Migrated CI/CD from Classic to YAML-based Azure DevOps pipelines, cutting review cycles by 40%. Recognized by senior leadership.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Built KQL monitoring dashboards and alerting for real-time service health, diagnosing production issues and sync failures before they became customer-facing.</div></div>
+            </div>
+        </div>
+
+        <!-- AMAZON -->
+        <div class="exp-panel" id="exp-2">
+            <div class="exp-header">
+                <div class="exp-title">Software Development Engineer <span class="exp-company">@ Amazon Web Services</span></div>
+                <div class="exp-meta"><span>Jun 2022 - Dec 2023</span><span>Seattle, WA</span></div>
+            </div>
+            <p class="exp-desc">Worked on Apollo, Amazon's internal deployment platform. Apollo ships software to Tier-1 services (S3, DynamoDB, Amazon Retail) across 6 million+ managed EC2 hosts, making it one of the largest deployment systems in the world.</p>
+            <div class="exp-bullets">
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Built and maintained features for Apollo's deployment orchestration, managing software packaging, version sets, and deployments across Amazon's global EC2 fleet of 6M+ hosts.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Designed RESTful APIs using Java, Spring Boot, and Jackson with full JUnit/Mockito test coverage. Owned the lifecycle from API design through production deployment.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Created Node.js load-balancing microservices for partial fleet rollouts, striping requests across load balancers and AZs with availability as the top priority.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Migrated on-premise applications to AWS (S3, EC2, RDS, SQS, SNS, CloudFormation) and added CloudWatch + New Relic monitoring, reducing system downtime by 30%.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Enhanced Apollo Import pipeline by writing comprehensive unit tests for the Apollo Client, resolving blocking test failures and improving transport layer stability.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Handled on-call rotations for production support across high-traffic Amazon services, triaging incidents to minimize customer impact on Tier-1 services.</div></div>
+            </div>
+        </div>
+
+        <!-- HCL -->
+        <div class="exp-panel" id="exp-3">
+            <div class="exp-header">
+                <div class="exp-title">Sr. Software Engineer <span class="exp-company">@ HCL Technologies</span></div>
+                <div class="exp-meta"><span>Jul 2019 - Aug 2021</span><span>Chennai, India</span></div>
+            </div>
+            <p class="exp-desc">Built Python-based data processing, automation, and alerting systems for Cisco's CA-BOLT project. Worked across Cisco's product lines including NXOS, iOS, ACI, VPN, and AnyConnect.</p>
+            <div class="exp-bullets">
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Developed and optimized 350+ Python data processing modules for Cisco's CA-BOLT project, automating code quality checks and fixing edge cases in data pipelines.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Built real-time alerting systems in Python that detected product issues and automatically notified customers, cutting incident response times across Cisco support.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Maintained legacy PHP backend applications, fixing OWASP-aligned security vulnerabilities and implementing input validation to prevent injection attacks.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Configured Jenkins CI/CD pipelines with Groovy and integrated automated test execution for Java and Node.js applications.</div></div>
+                <div class="exp-bullet"><div class="exp-bullet-icon">&#9654;</div><div class="exp-bullet-text">Built internal monitoring tools in Python to automate log management and system health checks, improving team operational efficiency by 30%.</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="container reveal">
+        <div class="section-badge">Tech Stack</div>
+        <h2 class="section-title">What I <span class="gradient">Work With</span></h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-card-icon" style="background:rgba(96,165,250,0.12);">&#9000;</div>
+                    <div class="skill-card-title">Languages</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Java</span><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">JavaScript</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-card-icon" style="background:rgba(167,139,250,0.12);">&#9881;</div>
+                    <div class="skill-card-title">Frameworks</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Spring Boot</span><span class="skill-tag">JUnit</span><span class="skill-tag">TestNG</span><span class="skill-tag">Mockito</span><span class="skill-tag">Node.js</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-card-icon" style="background:rgba(52,211,153,0.12);">&#128451;</div>
+                    <div class="skill-card-title">Databases</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">DynamoDB</span><span class="skill-tag">Aurora / PostgreSQL</span><span class="skill-tag">MySQL</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-card-icon" style="background:rgba(251,191,36,0.12);">&#9889;</div>
+                    <div class="skill-card-title">Messaging</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Apache Kafka</span><span class="skill-tag">Kafka Streams</span><span class="skill-tag">SQS</span><span class="skill-tag">SNS</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-card-icon" style="background:rgba(248,113,113,0.12);">&#9729;</div>
+                    <div class="skill-card-title">AWS</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">EC2</span><span class="skill-tag">S3</span><span class="skill-tag">Lambda</span><span class="skill-tag">CloudFormation</span><span class="skill-tag">Route 53</span><span class="skill-tag">CloudWatch</span><span class="skill-tag">CodeDeploy</span><span class="skill-tag">VPC</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-card-icon" style="background:rgba(96,165,250,0.12);">&#128295;</div>
+                    <div class="skill-card-title">CI/CD & Tools</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Jenkins</span><span class="skill-tag">JFrog</span><span class="skill-tag">SonarQube</span><span class="skill-tag">Docker</span><span class="skill-tag">Git</span><span class="skill-tag">PagerDuty</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+    <div class="container reveal">
+        <div class="section-badge">Education</div>
+        <h2 class="section-title">Academic <span class="gradient2">Background</span></h2>
+        <div class="edu-timeline">
+            <div class="edu-card">
+                <div><div class="edu-degree">Executive MS in Artificial Intelligence</div><div class="edu-school">University of the Cumberlands</div></div>
+                <div><div class="edu-gpa">In Progress</div><div class="edu-dates">Oct 2025 - Present</div></div>
+            </div>
+            <div class="edu-card">
+                <div><div class="edu-degree">MS in Computer Science, Data Science</div><div class="edu-school">University of Cincinnati</div></div>
+                <div><div class="edu-gpa">GPA: 3.83</div><div class="edu-dates">Aug 2021 - Dec 2022</div></div>
+            </div>
+            <div class="edu-card">
+                <div><div class="edu-degree">B.Tech, Electronics & Communication Engineering</div><div class="edu-school">Anurag Group of Institutions, Hyderabad</div></div>
+                <div><div class="edu-gpa">GPA: 9.6</div><div class="edu-dates">Aug 2015 - Apr 2019</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container reveal">
+        <div class="section-badge">Get In Touch</div>
+        <h2 class="section-title">Let's <span class="gradient">Connect</span></h2>
+        <p class="section-subtitle">Open to backend engineering opportunities. Reach out and let's talk.</p>
+        <div class="contact-grid">
+            <a href="mailto:baluparsi@gmail.com" class="contact-card">
+                <div class="contact-icon">&#9993;</div>
+                <div class="contact-label">Email</div>
+                <div class="contact-value">baluparsi@gmail.com</div>
+            </a>
+            <a href="https://linkedin.com/in/parsibalraj" target="_blank" class="contact-card">
+                <div class="contact-icon">&#128279;</div>
+                <div class="contact-label">LinkedIn</div>
+                <div class="contact-value">linkedin.com/in/parsibalraj</div>
+            </a>
+            <a href="https://github.com/balrajparsi" target="_blank" class="contact-card">
+                <div class="contact-icon">&#128187;</div>
+                <div class="contact-label">GitHub</div>
+                <div class="contact-value">github.com/balrajparsi</div>
+            </a>
+            <a href="tel:+15138375545" class="contact-card">
+                <div class="contact-icon">&#128222;</div>
+                <div class="contact-label">Phone</div>
+                <div class="contact-value">+1 (513) 837-5545</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>Designed & Built by Balraj Parsi &copy; 2026</p>
+    </div>
+</footer>
+
+<script>
+// Particles
+const particlesEl = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 2;
+    const colors = ['rgba(96,165,250,0.3)', 'rgba(167,139,250,0.3)', 'rgba(52,211,153,0.3)'];
+    p.style.cssText = `
+        width: ${size}px; height: ${size}px;
+        background: ${colors[Math.floor(Math.random() * 3)]};
+        left: ${Math.random() * 100}%;
+        animation-duration: ${Math.random() * 20 + 15}s;
+        animation-delay: ${Math.random() * 10}s;
+    `;
+    particlesEl.appendChild(p);
+}
+
+// Scroll reveals
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Experience tabs
+function showExp(i) {
+    document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.exp-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('exp-' + i).classList.add('active');
+    document.querySelectorAll('.exp-tab')[i].classList.add('active');
+}
+
+// Mobile nav close
+document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('active'));
+});
+</script>
+
+</body>
+</html>
