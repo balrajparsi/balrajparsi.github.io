@@ -150,5 +150,42 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 document.querySelectorAll('nav a').forEach(a=>{a.addEventListener('click',function(){document.querySelectorAll('nav a').forEach(x=>x.classList.remove('active'));this.classList.add('active')})});
 document.addEventListener('click',function(e){if(!e.target.closest('.resume-dd')){document.querySelectorAll('.rd-menu').forEach(m=>m.classList.remove('show'))}});
 </script>
+
+<!-- Floating chat widget -->
+<style>
+  .chat-widget{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  .chat-widget-btn{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#2563eb);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(29,78,216,.45);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s;position:relative}
+  .chat-widget-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(29,78,216,.55)}
+  .chat-widget-btn svg{width:26px;height:26px;color:#fff;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .chat-widget-tooltip{background:#0f172a;color:#f8fafc;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;padding:7px 14px;border-radius:20px;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.18);pointer-events:none;animation:cw-fade 0.2s ease;opacity:1}
+  .chat-widget-pulse{position:absolute;top:0;right:0;width:14px;height:14px;background:#22c55e;border-radius:50%;border:2px solid #fff}
+  .chat-widget-pulse::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:rgba(34,197,94,.4);animation:cw-pulse 2s infinite}
+  @keyframes cw-pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.6);opacity:0}}
+  @keyframes cw-fade{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:translateX(0)}}
+  .chat-widget-tooltip.hidden{display:none}
+</style>
+
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-widget-tooltip" id="chatTooltip">Chat with my experience</div>
+  <button class="chat-widget-btn" onclick="window.open('https://resume-chatbot-zeta.vercel.app','_blank')" aria-label="Chat with Balraj's experience">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="chat-widget-pulse"></span>
+  </button>
+</div>
+
+<script>
+  // Hide tooltip after 4 seconds
+  setTimeout(function(){
+    var t = document.getElementById('chatTooltip');
+    if(t) t.classList.add('hidden');
+  }, 4000);
+  // Show tooltip again on hover
+  document.getElementById('chatWidget').addEventListener('mouseenter', function(){
+    document.getElementById('chatTooltip').classList.remove('hidden');
+  });
+  document.getElementById('chatWidget').addEventListener('mouseleave', function(){
+    document.getElementById('chatTooltip').classList.add('hidden');
+  });
+</script>
 </body>
 </html>
